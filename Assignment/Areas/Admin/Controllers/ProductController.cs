@@ -89,34 +89,6 @@ namespace Assignment.Areas.Admin.Controllers
             var product = _productServices.GetAllProduct().FirstOrDefault(c => c.ID == id);
             return View(product);
         }
-        [HttpGet]
-        public IActionResult ChangeStatus(string nameProduct) // Mở form, truyền luôn sang form
-        {
-            _UserID = HttpContext.Session.GetString("UserID");
-            _Avata = HttpContext.Session.GetString("Avata");
-            _Name = HttpContext.Session.GetString("Name");
-            ViewBag.Avata = _Avata;
-            ViewBag.User = _Name;
-            if (_Name != null)
-            {
-                ViewBag.ProductInCart = _QL_CartDetails.GetAllCartDetail().Count(c => c.UserID == Guid.Parse(_UserID));
-            }
-            else
-            {
-                ViewBag.ProductInCart = 0;
-            }
-            var products = _productServices.GetAllProduct();
-            var product = products.Where(c => c.Name.ToLower().Contains(nameProduct.ToLower()));
-            if (product!=null)
-            {
-                foreach (var item in product)
-                {
-                    item.Status = 0;
-                    _productServices.UpdateProduct(item);
-                }
-            }
-           return RedirectToAction("ShowListProduct");
-        }
         public IActionResult UpdateProduct(Product product)
         {
             if (_productServices.UpdateProduct(product))
