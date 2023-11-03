@@ -48,7 +48,7 @@ namespace Assignment.Areas.Admin.Controllers
                 {
                     ViewBag.ProductInCart = 0;
                 }
-                var userList = _QL_UserServices.GetAllUser().Where(c => c.RoleName != "user");
+                var userList = _QL_UserServices.GetAllUser()/*.Where(c => c.RoleName != "user")*/;
                 if (!string.IsNullOrEmpty(strSearch))
                 {
                     userList = userList.Where(c => c.Username.ToLower().Contains(strSearch.ToLower()) || c.RoleName.ToLower().Contains(strSearch.ToLower()) || c.PhoneNumber == strSearch).ToList();
