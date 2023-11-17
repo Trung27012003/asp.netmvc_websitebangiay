@@ -21,8 +21,11 @@
 	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/detail.css" asp-append-version="true" />
 	<link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
-
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script src="https://kit.fontawesome.com/0b86f48f47.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-latest.js"></script>
 	<title>Admin </title>
 </head>
 
@@ -35,6 +38,12 @@
 			<span class="text">AdminHub</span>
 		</a>
 		<ul class="side-menu top">
+			<li>
+				<a href="/Admin/Home/Index">
+					<i class='bx bxs-dashboard'></i>
+					<span class="text">Thống Kê</span>
+				</a>
+			</li>
 			<li >
 				<a href="/Admin/Product/ShowListProduct">
 					<i class='bx bxs-dashboard'></i>
@@ -57,6 +66,12 @@
 				<a href="/Admin/User/ShowListUser">
 					<i class='bx bxs-user'></i>
 					<span class="text">Tài Khoản</span>
+				</a>
+			</li>
+			<li >
+				<a href="/Admin/Post/Show">
+					<i class='bx bxs-group'></i>
+					<span class="text">Post</span>
 				</a>
 			</li>
 			<li >
@@ -143,6 +158,7 @@
 	<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
+
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Assignment.Migrations
 {
-    public partial class migration : Migration
+    public partial class db1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace Assignment.Migrations
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CouponCodes = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    CouponValue = table.Column<double>(type: "float", nullable: false),
+                    CouponValue = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -69,7 +69,7 @@ namespace Assignment.Migrations
                 columns: table => new
                 {
                     UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(256)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(256)", nullable: false),
                     Avata = table.Column<string>(type: "nvarchar(256)", nullable: false),
@@ -95,7 +95,7 @@ namespace Assignment.Migrations
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CouponCodeID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CouponValue = table.Column<string>(type: "nvarchar(100)", nullable: false)
+                    CouponValue = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -156,6 +156,30 @@ namespace Assignment.Migrations
                         principalTable: "User",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "posts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Tittle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TittleImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Contents = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_posts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_posts_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "UserID");
                 });
 
             migrationBuilder.CreateTable(
@@ -256,6 +280,11 @@ namespace Assignment.Migrations
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_posts_UserId",
+                table: "posts",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_RoleID",
                 table: "User",
                 column: "RoleID");
@@ -271,6 +300,9 @@ namespace Assignment.Migrations
 
             migrationBuilder.DropTable(
                 name: "MaGiamGiaChiTiet");
+
+            migrationBuilder.DropTable(
+                name: "posts");
 
             migrationBuilder.DropTable(
                 name: "GioHang");

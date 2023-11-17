@@ -1,6 +1,7 @@
 ﻿using Assignment.IServices;
 using Assignment.Models;
 using Assignment.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assignment.Services
 {
@@ -98,6 +99,31 @@ namespace Assignment.Services
                 context.Add(Bill);
                 return true;
             }
+        }
+        public List<Bill> GetBillsByDate(DateTime startDate, DateTime endDate)
+        {
+            var sales = _billServices.GetAllBill()
+                .Where(s => s.CreatDate >= startDate && s.CreatDate <= endDate)
+                .ToList();
+
+            return sales;
+        }
+        public List<Bill> GetBillsStatistics()
+        {
+            // Thực hiện truy vấn để lấy dữ liệu thống kê từ cơ sở dữ liệu
+            var statistics = _billServices.GetAllBill()
+                .GroupBy(s => new { s.ID, s.CreatDate })
+                .Select(g => new Bill
+                {
+                    CreatDate = g.Key.CreatDate,
+                    ID = g.Key.ID,
+                    TotalAmout = g.Sum(s => s.TotalAmout)
+
+
+                })
+                .ToList();
+
+            return statistics;
         }
     }
 }

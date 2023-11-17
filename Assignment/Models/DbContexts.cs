@@ -21,11 +21,12 @@ namespace Assignment.Models
         public DbSet<User> Users { get; set; }
         public DbSet<CouponCode> CouponCode { get; set; }
         public DbSet<CouponCodeDetails> CouponCodeDetails { get; set; }
+        public DbSet<Post> posts { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=TRUNG2701;Initial Catalog=CSharp4_Assignment;Integrated Security=True;Connection Timeout=36000");
+            optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=CSharp4_Assignment;Integrated Security=True;Connection Timeout=36000");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

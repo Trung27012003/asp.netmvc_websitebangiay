@@ -1,4 +1,5 @@
-﻿using Assignment.ViewModels;
+﻿using Assignment.Models;
+using Assignment.ViewModels;
 
 namespace Assignment.IServices
 {
@@ -8,5 +9,6 @@ namespace Assignment.IServices
         public bool UpdateBillDetail(QL_BillDetailsViews p);
         public bool DeleteBillDetail(Guid id);
         public List<QL_BillDetailsViews> GetAllBillDetail();
+        
     }
 }

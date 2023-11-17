@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment.Migrations
 {
     [DbContext(typeof(DbContexts))]
-    [Migration("20230408025926_trung")]
-    partial class trung
+    [Migration("20231110093957_db1")]
+    partial class db1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -213,6 +213,43 @@ namespace Assignment.Migrations
                     b.ToTable("MaGiamGiaChiTiet", (string)null);
                 });
 
+            modelBuilder.Entity("Assignment.Models.Post", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Contents")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tittle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TittleImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("posts");
+                });
+
             modelBuilder.Entity("Assignment.Models.Product", b =>
                 {
                     b.Property<Guid>("ID")
@@ -332,7 +369,8 @@ namespace Assignment.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(256)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("UserID");
 
@@ -418,6 +456,15 @@ namespace Assignment.Migrations
                     b.Navigation("CouponCode");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Assignment.Models.Post", b =>
+                {
+                    b.HasOne("Assignment.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Assignment.Models.User", b =>

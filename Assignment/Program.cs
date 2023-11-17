@@ -3,11 +3,16 @@ using Assignment.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Data.SqlClient;
+using NuGet.Protocol.Core.Types;
 using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IProductServices, ProductServices>();
+builder.Services.AddTransient<IQL_BillServices, QL_BillServices>();
+builder.Services.AddTransient<IQL_BillDetailsServices, QL_BillDetailsServices>();
+builder.Services.AddTransient<IUserServices, UserServices>();
+builder.Services.AddTransient<IPostService, PostService>();
 //builder.Services.AddSingleton<IProductServices, ProductServices>();
 // builder.Services.AddScoped<IProductServices, ProductServices>();
 /*

@@ -9,5 +9,7 @@ namespace Assignment.IServices
         public bool UpdateBill(QL_BillViews p);
         public bool DeleteBill(Guid id);
         public List<QL_BillViews> GetAllBill();
+        public List<Bill> GetBillsStatistics();
+        public List<Bill> GetBillsByDate(DateTime startDate, DateTime endDate);
     }
 }
