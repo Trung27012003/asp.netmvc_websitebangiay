@@ -7,6 +7,7 @@
 }
 @foreach(var item in Model){
     <div class = container>
+        <div class="card mb-4">
         <a href="/Post/Detail/@item.Id">
 <img
   src="/Images/@item.TittleImage"
@@ -15,5 +16,6 @@
 
   <h5>@item.Tittle</h5>
   </a>
+  </div>
 </div>
 }
